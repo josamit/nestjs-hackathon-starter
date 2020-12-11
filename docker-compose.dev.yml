@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: booking_manager
+      MYSQL_USER: booking_manager_dev
+      MYSQL_PASSWORD: booking_manager_mysql_amazing_db_dev
+      MYSQL_ROOT_PASSWORD: booking_manager_mysql_amazing_db_root
+    ports:
+      - 33306:3306
+volumes:
+  db_data: {}
+networks:
+  web:
+    external: true
+

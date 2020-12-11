@@ -1,0 +1,12 @@
+[
+  {
+    "script": "/app/frontend/dist/index.js",
+    "name": "frontend",
+    "cwd": "/app/frontend"
+  },
+  {
+    "script": "main.js",
+    "name": "backend",
+    "cwd": "/app/backend/dist"
+  }
+]

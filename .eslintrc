@@ -1,0 +1,99 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module", // Allows for the use of imports
+    "ecmaFeatures": {
+      "jsx": true // Allows for the parsing of JSX
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+      // Tells eslint-plugin-react to automatically detect the version of React to use
+    }
+  },
+  "overrides": [
+    //No need for runtime checks of prop-types for TS code in dev
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "react/prop-types": "off",
+        // It is sometimes nice to be able to create props with a function. For instance react-use-form-state.
+        "react/jsx-props-no-spreading": "off"
+      }
+    },
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        // Allows us to use () => <Element /> functions without explicit return types
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
+    }
+  ],
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jest": true
+  },
+  "globals": {
+    "ENV_DEV": "readonly"
+  },
+  "plugins": ["prettier", "react-hooks", "unused-imports", "eslint-plugin-import"],
+  "rules": {
+    //Some API responses need non-camelcase
+    "camelcase": 0,
+    "@typescript-eslint/camelcase": 0,
+    //No need to specify file extensions in imports
+    "import/extensions": 0,
+    //TODO: fix resolution for linter
+    "import/no-unresolved": 0,
+    //Allow jsx in non-jsx files
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    //Max 1 prop per line when using multiline JSX
+    "react/jsx-max-props-per-line": [1, { "maximum": 1, "when": "multiline" }],
+    // You must disable the base rule as it can report incorrect errors
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    // You must disable the base rule as it can report incorrect errors
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    // To allow dependencies in test code
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    // To support eslint-plugin-unused-imports
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports-ts": "error",
+    "unused-imports/no-unused-vars-ts": [
+      "warn",
+      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+    ],
+    // Sort imports
+    "import/order": ["error", {
+      "alphabetize": {
+        "order": "asc"
+      },
+      "pathGroups": [
+        {
+          "pattern": "@Root/**",
+          "group": "external",
+          "position": "after"
+        }
+      ],
+      "pathGroupsExcludedImportTypes": ["builtin"],
+      "newlines-between": "always"
+    }],
+    "@typescript-eslint/ban-ts-comment": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off"
+  }
+}

@@ -1,0 +1,17 @@
+node_modules
+/*/node_modules
+/*/dist
+/*/build
+/*/.next
+Dockerfile
+docker-compose.yml
+lerna-debug.log
+.idea
+.vscode
+.git
+Makefile
+README.md
+.dockerignore
+.gitignore
+traefik
+/*/.eslintcache

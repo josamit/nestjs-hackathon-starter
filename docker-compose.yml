@@ -1,0 +1,38 @@
+version: "2"
+
+services:
+  frontend:
+    image: "booking-manager:latest"
+    restart: always
+    environment:
+      DOMAIN: https://boooking-manager.joamit.app
+      API_HOST: backend
+      NODE_ENV: production
+    working_dir: /app/frontend
+    command: node dist/index.js
+  backend:
+    image: "booking-manager:latest"
+    restart: always
+    ports:
+      - 4050:4050
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      NODE_ENV: production
+      DOMAIN: https://boooking-manager.joamit.app
+    working_dir: /app/backend
+    command: node dist/main.js
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: booking_manager
+      MYSQL_USER: booking_manager_dev
+      MYSQL_PASSWORD: booking_manager_mysql_amazing_db_dev
+      MYSQL_ROOT_PASSWORD: booking_manager_mysql_amazing_db_root
+    ports:
+      - 33306:3306
+volumes:
+  db_data: {}
