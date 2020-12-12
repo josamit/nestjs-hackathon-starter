@@ -2,7 +2,9 @@ import "../styles/globals.scss";
 import { Theme } from "@twilio-paste/core/theme";
 import { Router } from "next/router";
 import NProgress from "nprogress";
+import "toastr";
 
+import Layout from "../components/layout/layout";
 import { AppStateProvider } from "../core/AppStateContext";
 
 // Configuration
@@ -17,7 +19,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <Theme.Provider theme="default">
       <AppStateProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </AppStateProvider>
     </Theme.Provider>
   );

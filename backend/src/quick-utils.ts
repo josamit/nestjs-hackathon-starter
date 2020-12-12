@@ -1,4 +1,4 @@
-import { getConnection } from 'typeorm';
+import { getConnection } from "typeorm";
 
 type ValidationPayload = {
   message: string;

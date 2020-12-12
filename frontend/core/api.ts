@@ -14,7 +14,7 @@ export function apiGet(path: string, dataSetter: any) {
 
 export function useGet<T = any>(
   path: string,
-  deps: any[] = []
+  deps: any[] = [],
 ): {
   data: T;
   refetch(): void;

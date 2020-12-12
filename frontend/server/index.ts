@@ -4,7 +4,7 @@ import next from "next";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({
-  dev,
+  dev
 });
 const handle = app.getRequestHandler();
 const port = process.env.PORT || 4040;
@@ -17,7 +17,7 @@ const API_HOST = process.env.API_HOST || "localhost";
     const server = express();
     server.use("/api", proxy(`http://${API_HOST}:4050`));
 
-    server.use(function (req, res, n) {
+    server.use(function(req, res, n) {
       res.setHeader(
         "Access-Control-Allow-Headers",
         "accept, authorization, content-type, x-requested-with"

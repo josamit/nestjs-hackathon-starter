@@ -15,7 +15,4 @@ services:
       - 33306:3306
 volumes:
   db_data: {}
-networks:
-  web:
-    external: true
 

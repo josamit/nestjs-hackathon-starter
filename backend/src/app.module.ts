@@ -1,22 +1,40 @@
-import { Injectable, MiddlewareConsumer, Module, NestMiddleware, NestModule, } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { typeormConfig } from './typeorm'
-import { Request, Response } from 'express'
-import { getUserOrNull } from './sessions/sessions.controller'
-import { User } from './users/entities/user.entity'
-import { Type } from '@nestjs/common/interfaces/type.interface'
-import { DynamicModule } from '@nestjs/common/interfaces/modules/dynamic-module.interface'
-import { ForwardReference } from '@nestjs/common/interfaces/modules/forward-reference.interface'
-import { AuthModule } from './auth/auth.module'
-import { SessionsModule } from './sessions/sessions.module'
-import { UsersModule } from './users/users.module'
+import {
+  Injectable,
+  MiddlewareConsumer,
+  Module,
+  NestMiddleware,
+  NestModule,
+} from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { typeormConfig } from "./typeorm";
+import { Request, Response } from "express";
+import { User } from "./users/entities/user.entity";
+import { Type } from "@nestjs/common/interfaces/type.interface";
+import { DynamicModule } from "@nestjs/common/interfaces/modules/dynamic-module.interface";
+import { ForwardReference } from "@nestjs/common/interfaces/modules/forward-reference.interface";
+import { AuthModule } from "./auth/auth.module";
+import { UserSessionsModule } from "./user-sessions/user.sessions.module";
+import { UsersModule } from "./users/users.module";
+import { getRepository } from "typeorm";
+import { UserSession } from "./user-sessions/entities/user.session.entity";
 
 @Injectable()
 export class UserMiddleware implements NestMiddleware {
   async use(req: Request & { user?: User | null }, res: Response, next) {
-    req.user = await getUserOrNull(req);
+    const sessionToken = req.cookies.sessionToken;
+    const session = await getRepository(UserSession).findOne({
+      token: sessionToken,
+    });
+
+    if (!session) {
+      req.user = null;
+    }
+
+    req.user = await getRepository(User).findOne({
+      id: session.userId,
+    });
 
     next();
   }
@@ -29,7 +47,7 @@ let imports: Array<
 imports = imports.concat([
   AuthModule,
   UsersModule,
-  SessionsModule,
+  UserSessionsModule,
   TypeOrmModule.forRoot(typeormConfig),
 ]);
 
@@ -40,6 +58,6 @@ imports = imports.concat([
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(UserMiddleware).forRoutes('domains*');
+    consumer.apply(UserMiddleware).forRoutes("domains*");
   }
 }

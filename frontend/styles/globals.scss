@@ -64,11 +64,33 @@
 }
 
 @-webkit-keyframes nprogress-spinner {
-  0%   { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-@keyframes nprogress-spinner {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
+@keyframes nprogress-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// fonts
+$web-font-path: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" !default;
+@import url($web-font-path);
+
+// Variables ===================================================================
+@import "variables";
+
+// importing entire bootstrap right now, optimize it to reduce the bundle size and import only what is being used
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+
+// import toastr scss
+@import "../node_modules/toastr/toastr";

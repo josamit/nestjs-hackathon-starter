@@ -1,10 +1,10 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from "@nestjs/common";
 import { Request, Response } from "express";
-import { ValidationException } from "../quick-utils";
+import { NotLoggedInException } from "../user-sessions/user.sessions.controller";
 
-@Catch(ValidationException)
-export class ValidationExceptionFilter implements ExceptionFilter {
-  catch(exception: ValidationException, host: ArgumentsHost) {
+@Catch(NotLoggedInException)
+export class NotLoggedInExceptionFilter implements ExceptionFilter {
+  catch(exception: NotLoggedInException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
@@ -13,7 +13,6 @@ export class ValidationExceptionFilter implements ExceptionFilter {
     response.status(status).json({
       statusCode: status,
       message: `${exception.message}`,
-      fields: `${exception.fields}`,
       timestamp: new Date().toISOString(),
       path: request.url,
     });

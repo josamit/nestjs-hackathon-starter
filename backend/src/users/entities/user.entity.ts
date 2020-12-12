@@ -1,10 +1,16 @@
-import { Column, CreateDateColumn, Unique, UpdateDateColumn } from 'typeorm';
-import { Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Unique,
+  UpdateDateColumn,
+} from "typeorm";
 
-@Entity('users')
-@Unique(['email'])
+@Entity("users")
+@Unique(["email"])
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -13,9 +19,19 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  canAccessAdminDashboard: boolean;
+
   @UpdateDateColumn()
   updatedAt: Date;
 
   @CreateDateColumn()
   createdAt: Date;
+
+  getDto() {
+    return {
+      email: this.email,
+      canAccessAdminDashboard: this.canAccessAdminDashboard,
+    };
+  }
 }
