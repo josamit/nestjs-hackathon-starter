@@ -106,9 +106,13 @@ export default function Register() {
               </div>
             </div>
             <Box marginTop="space60" className="text-center">
-              <Button variant="primary" type="submit" fullWidth>
+              <button
+                className="btn btn-primary"
+                type="submit"
+                style={{ width: "10rem" }}
+              >
                 Register
-              </Button>
+              </button>
             </Box>
           </form>
         </div>

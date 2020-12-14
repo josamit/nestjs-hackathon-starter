@@ -65,9 +65,15 @@ export default function Register() {
               placeholder="Password"
               required
             />
-            <Button variant="primary" type="submit" fullWidth>
-              Login
-            </Button>
+            <div className="text-center">
+              <button
+                className="btn btn-primary"
+                type="submit"
+                style={{ width: "8rem" }}
+              >
+                Login
+              </button>
+            </div>
           </form>
         </div>
       </div>

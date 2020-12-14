@@ -96,37 +96,44 @@ const Navbar: FC = () => {
             <ul className="navbar-nav ml-auto">
               {!isConsole && user.canAccessAdminDashboard && (
                 <li className="nav-item p-1 ml-auto">
-                  <Button
-                    variant="primary"
+                  <button
+                    className="btn btn-primary"
+                    type="button"
                     onClick={() => router.push("/console/dashboard")}
                   >
                     Go to dashboard
-                  </Button>
+                  </button>
                 </li>
               )}
               <li className="nav-item p-1 ml-auto">
-                <Button variant="destructive" onClick={() => logout()}>
+                <button
+                  className="btn btn-danger"
+                  type="button"
+                  onClick={() => logout()}
+                >
                   Logout
-                </Button>
+                </button>
               </li>
             </ul>
           ) : (
             <ul className="navbar-nav ml-auto">
               <li className="nav-item p-1 ml-auto">
-                <Button
-                  variant="secondary"
+                <button
+                  className="btn btn-secondary"
+                  type="button"
                   onClick={() => router.push("/login")}
                 >
                   Login
-                </Button>
+                </button>
               </li>
               <li className="nav-item p-1  ml-auto">
-                <Button
-                  variant="primary"
+                <button
+                  className="btn btn-primary"
+                  type="button"
                   onClick={() => router.push("/register")}
                 >
                   Sign up
-                </Button>
+                </button>
               </li>
             </ul>
           )}
