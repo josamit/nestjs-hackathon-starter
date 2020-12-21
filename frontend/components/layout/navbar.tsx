@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@twilio-paste/core";
+import { Box, Flex } from "@twilio-paste/core";
 import { Router, useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
 
@@ -119,7 +119,7 @@ const Navbar: FC = () => {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item p-1 ml-auto">
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-primary"
                   type="button"
                   onClick={() => router.push("/login")}
                 >
