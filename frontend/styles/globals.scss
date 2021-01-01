@@ -94,3 +94,39 @@ $web-font-path: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700
 
 // import toastr scss
 @import "../node_modules/toastr/toastr";
+
+.map-container {
+  height: 100vh;
+}
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1199.98px) {
+  .map-container {
+    height: 100vh;
+  }
+}
+
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 991.98px) {
+  .map-container {
+    height: 100vh;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 767.98px) {
+  .map-container {
+    height: 100vh;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 575.98px) {
+  .map-container {
+    height: 40vh;
+  }
+}
+
+

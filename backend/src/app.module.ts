@@ -19,6 +19,7 @@ import { UserSessionsModule } from "./user-sessions/user.sessions.module";
 import { UsersModule } from "./users/users.module";
 import { getRepository } from "typeorm";
 import { UserSession } from "./user-sessions/entities/user.session.entity";
+import { SalonsModule } from "./salons/salons.module";
 
 @Injectable()
 export class UserMiddleware implements NestMiddleware {
@@ -47,6 +48,7 @@ let imports: Array<
 imports = imports.concat([
   AuthModule,
   UsersModule,
+  SalonsModule,
   UserSessionsModule,
   TypeOrmModule.forRoot(typeormConfig),
 ]);

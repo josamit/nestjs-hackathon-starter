@@ -1,4 +1,3 @@
-import { Box, Heading } from "@twilio-paste/core";
 import { useEffect } from "react";
 
 import { useAppState } from "../core/AppStateContext";
@@ -18,12 +17,10 @@ const Home = () => {
 
   return (
     <div className="container">
-      <Box marginTop="space120" marginBottom="space120" alignContent="center">
-        <Heading as="h1" variant="heading10">
-          {user && <>{`Hello, ${user.email}!`}</>}
-          {!user && <>Hello!</>}
-        </Heading>
-      </Box>
+      <div className="row">
+        <div className="col-sm-12 col-md-12 col-lg-6">cards here</div>
+        <div className="col-sm-12 col-md-12 col-lg-6">map here</div>
+      </div>
     </div>
   );
 };
